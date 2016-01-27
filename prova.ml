@@ -1,12 +1,13 @@
-
+(* to compile:  ocamlbuild -pkgs apron.apron,apron.boxMPQ,apron.octMPQ prova.native -- *)
 open Apron;;
 open Mpqf;;
 open Format;;
 
+(* Inizialize variable *)
 let var_x = Var.of_string "x";;
 
 
-(* box manager*)
+(* Box manager*)
 let manBox = Box.manager_alloc();;
 
 
@@ -31,9 +32,6 @@ let interval1 =  Interval.of_scalar (Scalar.of_int 0) (Scalar.of_infty 1);;
 	let intervallo = Abstract1.bound_variable manBox abs1 var_x;;
 
 
-(*printf "abs1=%a@."
-    Abstract1.print abs1
-;;	*)	
 
 			let print_infty (valore: Scalar.t) =
 					if (Scalar.equal (Scalar.of_infty(1)) valore)

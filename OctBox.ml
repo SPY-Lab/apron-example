@@ -1,11 +1,11 @@
 (* to compile: ocamlbuild -pkgs apron.apron,apron.boxMPQ,apron.octMPQ OctBox.native -- *)
 
-
+(* Test of interval of Box and Oct *)
 
 open Apron;;
 open Mpqf;;
 open Format;;
-
+(* Print functions *)
 let print_infty (valore: Interval.t) =
 	if (Interval.is_top valore)
 		then printf"[-oo ;+oo] "
@@ -106,7 +106,4 @@ let leastUpperBoundOct = Abstract1.join manOct abstract_domain_oct other_abstrac
 	printf "print ad Oct: %a"
 	Abstract1.print leastUpperBoundOct;;
 
-(*let greatestLowerBound = Abstract1.meet manBox abstract_domain other_abstract_domain in
-	printf "Greatest lower bound:";
-	printf "%a" Abstract1.print greatestLowerBound;
-	print_abs_domain_as_box greatestLowerBound manBox;;*)
+

@@ -1,5 +1,7 @@
 (* ocamlbuild -pkgs apron.boxMPQ,apron,apron.apron,apron.octMPQ test.native -- *)
 
+(* Tests of Apron's functions *)
+
 open Apron;;
 open Mpqf;;
 open Format;;
@@ -35,35 +37,37 @@ let bottom2 = Interval.bottom;;
 (*how to create an intervall of integer*)
 let interval1 =  Interval.of_int 4 12;;
 
-(*Scalar.of_infty moltiplica il valore per un infinititesimo, rendendolo quindi +inf o -inf*)
+(* Scalar.of_infty  Create a scalar of type Float with the value multiplied
+ by infinity (resulting in minus infinity, zero, or infinity *)
 let interval1 =  Interval.of_scalar (Scalar.of_int 0) (Scalar.of_infty 1);;
 
-(*cambia il valore di un intervallo*)
+(* Change interval *)
 Interval.set_infsup interval1  (Scalar.of_int 0) (Scalar.of_infty 1);;
 
-(*genera il valore astratto delle variabili sotto forma di box*)
-     let abs1 = Abstract1.of_box manBox env [|var_x;var_y|]
+(* Create an abstract domain Box *)
+let abs1 = Abstract1.of_box manBox env [|var_x;var_y|]
     [|
       interval1;
       Interval.of_int 4 12;
     |];;
 
-     let abs2 = Abstract1.of_box manBox env [|var_x;var_y|]
+let abs2 = Abstract1.of_box manBox env [|var_x;var_y|]
     [|
       Interval.of_int 0 14;
       Interval.of_int 4 12;
     |];;
 
-	(*join*)
-    let joinBox = Abstract1.join manBox abs1 abs2;;
-    (*meet*)
-	let meetBox = Abstract1.meet manBox abs1 abs2;;
+(* Join *)
+let joinBox = Abstract1.join manBox abs1 abs2;;
 
-	(*vedere l'intervallo di una data variabile*)
-	let intervallo = Abstract1.bound_variable manBox abs1 var_x;;
+(* Meet *)
+let meetBox = Abstract1.meet manBox abs1 abs2;;
 
-(*genera il valore astratto delle variabili sotto forma di box*)
-     let abs3 = Abstract1.of_box manOct env [|var_x;var_y|]
+(* Watch the interval of a variable *)
+let intervallo = Abstract1.bound_variable manBox abs1 var_x;;
+
+(* Create an Abstract Domain Oct *)
+let abs3 = Abstract1.of_box manOct env [|var_x;var_y|]
     [|
       interval1;
       Interval.of_int 4 12;
@@ -75,40 +79,40 @@ Interval.set_infsup interval1  (Scalar.of_int 0) (Scalar.of_infty 1);;
       Interval.of_int 4 12;
     |];;
 
-	(*join*)
-    let joinOct = Abstract1.join manOct abs3 abs4;;
-    (*meet*)
-	let meetOct = Abstract1.meet manOct abs3 abs4;;
+(* Join *)
+let joinOct = Abstract1.join manOct abs3 abs4;;
+
+(* Meet *)
+let meetOct = Abstract1.meet manOct abs3 abs4;;
 
 
-	(*stampa box*)
-	printf "abs1=%a@.abs2=%a@.joinBox=%a@.meetBox=%a"
-    Abstract1.print abs1
-    Abstract1.print abs2
-    Abstract1.print joinBox
-    Abstract1.print meetBox
-	;;
-	printf("\n");;
-    printf "Intervallo var_x: %a"
-    Interval.print intervallo
-  ;;	
-  printf("\n");;
+(* Print box *)
+printf "abs1=%a@.abs2=%a@.joinBox=%a@.meetBox=%a"
+  Abstract1.print abs1
+  Abstract1.print abs2
+  Abstract1.print joinBox
+  Abstract1.print meetBox
+;;
 
-   printf "sup: %a"
- 	Scalar.print intervallo.sup;;
+printf("\n");;
+printf "Intervallo var_x: %a" Interval.print intervallo;;	
+printf("\n");;
 
-(*stampa oct*)
-	printf "abs3=%a@.abs4=%a@.joinOct=%a@.meetOct=%a"
-    Abstract1.print abs3
-    Abstract1.print abs4
-    Abstract1.print joinOct
-    Abstract1.print meetOct
-	;;
-	printf("\n");;
-    printf "Intervallo var_x: %a"
-    Interval.print intervallo
-  ;;	
-  printf("\n");;
+printf "sup: %a"
+Scalar.print intervallo.sup;;
+
+(* Print oct *)
+printf "abs3=%a@.abs4=%a@.joinOct=%a@.meetOct=%a"
+  Abstract1.print abs3
+  Abstract1.print abs4
+  Abstract1.print joinOct
+  Abstract1.print meetOct
+;;
+
+printf("\n");;
+printf "Intervallo var_x: %a" Interval.print intervallo;;	
+
+printf("\n");;
 
 
 

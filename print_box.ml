@@ -6,15 +6,6 @@ open Format;;
 
 (* Function declaration *)
 
-(*let print_infty (valore: Scalar.t) =
-	if (Scalar.equal (Scalar.of_infty(1)) valore)
-		then printf"+oo"
-	else 
-	if (Scalar.equal (Scalar.of_infty(-1)) valore)
-		then printf"-oo"
-	else
-		printf"%a" Scalar.print valore;;
-*)
 let print_infty (valore: Interval.t) =
 	if (Interval.is_top valore)
 		then printf"[-oo; +oo] "
@@ -49,6 +40,8 @@ let print_abs_domain_as_box abs man =
 					done;
 				printf "}"; print_newline();;
 
+
+(* Inizialize variables *)
 let var_x = Var.of_string "x"
 let var_y = Var.of_string "y"
 let var_z = Var.of_string "z"
@@ -65,6 +58,7 @@ let manBox = Box.manager_alloc();;
     [| var_x; var_y; var_z |]
     [||];;
 
+(* Inizialize intervals *)
 let interval_for_x =  Interval.of_scalar (Scalar.of_int 1) (Scalar.of_int 2);;
 let interval_for_y =  Interval.of_scalar (Scalar.of_int 2) (Scalar.of_int 3);;
 let interval_for_z =  Interval.of_scalar (Scalar.of_int 3) (Scalar.of_int 4);;
@@ -73,6 +67,7 @@ let other_interval_for_x =  Interval.bottom;;
 let other_interval_for_y =  Interval.of_scalar (Scalar.of_int 1) (Scalar.of_int 2);;
 let other_interval_for_z =  Interval.of_scalar (Scalar.of_int 2) (Scalar.of_int 3);;
 
+(* inizialize abstract domains *)
 let abstract_domain = Abstract1.of_box manBox env 
 	[| var_x; var_y; var_z |]
     [| interval_for_x; interval_for_y; interval_for_z |];;
