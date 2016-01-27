@@ -1,3 +1,6 @@
+(* to compile: ocamlbuild -pkgs apron.apron,apron.boxMPQ,apron.octMPQ OctBox.native -- *)
+
+
 
 open Apron;;
 open Mpqf;;
