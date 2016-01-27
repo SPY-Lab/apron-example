@@ -34,7 +34,7 @@ let top2 = Interval.top;;
 (*how to create an interval BOTTOM*)
 let bottom2 = Interval.bottom;;
 
-(*how to create an intervall of integer*)
+(*how to create an interval of integer*)
 let interval1 =  Interval.of_int 4 12;;
 
 (* Scalar.of_infty  Create a scalar of type Float with the value multiplied

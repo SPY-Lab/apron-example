@@ -1,0 +1,5 @@
+"Rule: ocaml: ml -> cmo & cmi (%=widening )": "\179\167>\002\228\163-\161\136\0188\19807\247;"
+"Rule: ocaml: ml & cmi -> cmx & o (%=widening )": "\198\236hU\175\168\015\139\172s\203\190\001y\011N"
+"Resource: /home/aurelio/ocaml/widening.ml": "g\148\171\156x\141%\019\198I\133\244o\134\162O"
+"Rule: ocaml: cmx* & o* -> native (%=widening )": "\181&\228&\205\149\129)\007[|\181\006\235W\174"
+"Rule: ocaml dependencies ml (%=widening )": "l3\020\143\253\134C\253\177\156\127\146=\148k~"
