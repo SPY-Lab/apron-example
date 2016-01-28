@@ -1,4 +1,5 @@
 (* test widening *)
+(* to compile: ocamlbuild -pkgs apron.apron,apron.boxMPQ,apron.octMPQ widening.native -- *)
 open Apron;;
 open Mpqf;;
 open Format;;
@@ -26,7 +27,7 @@ let print_abs_domain_as_box abs man =
 			let (a, b) = variabili in
 				printf "\nInteger:";
 				printf "{ ";
-				if Array.length a != 0 then
+				if (Array.length a != 0) then
 					for i = 0 to Array.length a - 1 do
 						print_variable_as_interval a.(i) abs man;
 					done;
@@ -43,7 +44,6 @@ let print_abs_domain_as_box abs man =
 let var_x = Var.of_string "x";;
 
 
-
 (* Box manager*)
 let manBox = Box.manager_alloc();;
 
@@ -55,14 +55,13 @@ let manBox = Box.manager_alloc();;
 
 (* Inizialize intervals *)
 let interval_for_x =  Interval.of_scalar (Scalar.of_int 3) (Scalar.of_int 5);;
+let other_interval_for_x =  Interval.of_scalar (Scalar.of_int 1) (Scalar.of_int 3);;
 
+(* Create abstract domain *)
 let abs1 = Abstract1.of_box manBox env [|var_x|]
     [|
       interval_for_x;
     |];;
-
-
-let other_interval_for_x =  Interval.of_scalar (Scalar.of_int 1) (Scalar.of_int 3);;
 
 let abs2 = Abstract1.of_box manBox env [|var_x;|]
     [|
@@ -71,10 +70,9 @@ let abs2 = Abstract1.of_box manBox env [|var_x;|]
 
 
 let abs_top = Abstract1.top manBox env;;
-
 let abs_bottom = Abstract1.bottom manBox env;;
 
-
+(* Test widening *)
 let abs_widening = Abstract1.widening manBox abs1 abs2;;
 let abs_join = Abstract1.join manBox abs1 abs2;;
 
@@ -87,12 +85,13 @@ let abs_join_abs1_bottom = Abstract1.join manBox abs_bottom abs1;;
 let abs_widening_top_bottom = Abstract1.widening manBox  abs_bottom abs_top;;
 let abs_join_top_bottom = Abstract1.join manBox abs_top abs_bottom;;
 
+
+(* Print the results *)
 printf"\n";;
 
 printf "abs1: ";;
 print_abs_domain_as_box abs1 manBox;;
 printf"\n";;
-
 
 printf "abs2: ";;
 print_abs_domain_as_box abs2 manBox;;
@@ -106,7 +105,6 @@ printf "Widening abs1 abs2: ";;
 print_abs_domain_as_box abs_widening manBox;;
 printf"\n";;
 
-
 printf "Join abs1 top: ";;
 print_abs_domain_as_box abs_join_abs1_top manBox;;
 printf"\n";;
@@ -114,8 +112,6 @@ printf"\n";;
 printf "Widening abs1 top: ";;
 print_abs_domain_as_box abs_widening_abs1_top manBox;;
 printf"\n";;
-
-
 
 printf "Join bottom top: ";;
 print_abs_domain_as_box abs_join_top_bottom manBox;;

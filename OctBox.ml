@@ -6,6 +6,7 @@ open Apron;;
 open Mpqf;;
 open Format;;
 (* Print functions *)
+
 let print_infty (valore: Interval.t) =
 	if (Interval.is_top valore)
 		then printf"[-oo ;+oo] "
@@ -41,7 +42,7 @@ let print_abs_domain_as_box abs man =
 				printf "}"; print_newline();;
 
 
-
+(* Definition of variables *)
 let var_x = Var.of_string "x"
 let var_y = Var.of_string "y"
 let var_z = Var.of_string "z"
@@ -53,17 +54,18 @@ let manBox = Box.manager_alloc();;
 (* Oct manager*)
 let manOct = Oct.manager_alloc();;
 
-(* Making an environment from a set of integer and real variables (empty) *)
+(* Creating environment from a set of integer and real variables (empty) *)
  let env = Environment.make
     [| var_y |]
     [||];;
 
+(* Defining interval for y *)
 let interval_for_y =  Interval.of_scalar (Scalar.of_int 2) (Scalar.of_int 7);;
 
-
+(* Defining an other interval for y *)
 let other_interval_for_y =  Interval.of_scalar (Scalar.of_int 4) (Scalar.of_int 10);;
 
-(* Making abstract domain of box *)
+(* Making abstract domains of box *)
 let abstract_domain_box = Abstract1.of_box manBox env 
 	[| var_y |]
     [| interval_for_y|];;
@@ -94,7 +96,7 @@ printf "abs oct: ";;
 print_abs_domain_as_box abstract_domain_oct manOct;;
 print_abs_domain_as_box other_abstract_domain_oct manOct;;
 
-
+(* Print the least upper bound *)
 let leastUpperBoundBox = Abstract1.join manBox abstract_domain_box other_abstract_domain_box in
 	printf "Least upper bound Box:";
 	print_abs_domain_as_box leastUpperBoundBox manBox;;

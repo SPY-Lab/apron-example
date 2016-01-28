@@ -25,42 +25,45 @@ let manOct = Oct.manager_alloc();;
 (* Removing var_y to the environment *)
 let env = Environment.remove env [|var_y|];;
 
+
 (* Adding var_y to the environment *)
 let env = Environment.add env [||] [|var_y|];;
 
+
+
 (*how to create an abstract domain TOP*)
-let abs_top = Abstract1.top manBox env;;
+let top1 = Abstract1.top manBox env;;
 
 (*how to create an abstract domain BOTTOM*)
-let abs_bottom = Abstract1.bottom manBox env;;
+let bottom1 = Abstract1.bottom manBox env;;
 
 (*how to create an interval TOP*)
-let interval_top = Interval.top;;
+let top2 = Interval.top;;
 
 (*how to create an interval BOTTOM*)
-let interval_bottom = Interval.bottom;;
+let bottom2 = Interval.bottom;;
 
 (*how to create an interval of integer*)
-let interval =  Interval.of_int 4 12;;
+let interval1 =  Interval.of_int 4 12;;
 
 (* Scalar.of_infty  Create a scalar of type Float with the value multiplied
  by infinity (resulting in minus infinity, zero, or infinity *)
-let interval =  Interval.of_scalar (Scalar.of_int 0) (Scalar.of_infty 1);;
+let interval1 =  Interval.of_scalar (Scalar.of_int 0) (Scalar.of_infty 1);;
 
 (* Change interval *)
-Interval.set_infsup interval (Scalar.of_int 0) (Scalar.of_infty 1);;
+Interval.set_infsup interval1  (Scalar.of_int 0) (Scalar.of_infty 1);;
 
 (* Create an abstract domain Box *)
 let abs1 = Abstract1.of_box manBox env [|var_x;var_y|]
     [|
-      interval;
-      Interval.of_int 3 5;
+      interval1;
+      Interval.of_int 4 12;
     |];;
 
 let abs2 = Abstract1.of_box manBox env [|var_x;var_y|]
     [|
       Interval.of_int 0 14;
-      Interval.of_int 7 9;
+      Interval.of_int 4 12;
     |];;
 
 (* Join *)
