@@ -120,8 +120,8 @@ let leastUpperBoundOct = Abstract1.join manOct abstract_domain_oct other_abstrac
 	print_abs_domain_as_box leastUpperBoundOct manOct;
 	printf "\n";
 	printf "print as Oct: %a"
-	Abstract1.print leastUpperBoundOct;
-	printf "\n";;
+	Abstract1.print leastUpperBoundOct;;
+
 let leastUpperBoundPolka = Abstract1.join manPolka abstract_domain_polka other_abstract_domain_polka in
 	printf "Least upper bound Oct:";
 	print_abs_domain_as_box leastUpperBoundPolka manPolka;

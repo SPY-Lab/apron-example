@@ -27,7 +27,7 @@ let print_abs_domain_as_box abs man =
 			let (a, b) = variabili in
 				printf "\nInteger:";
 				printf "{ ";
-				if (Array.length a != 0) then
+				if Array.length a != 0 then
 					for i = 0 to Array.length a - 1 do
 						print_variable_as_interval a.(i) abs man;
 					done;

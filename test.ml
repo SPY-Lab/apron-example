@@ -44,7 +44,7 @@ let interval_bottom = Interval.bottom;;
 let interval =  Interval.of_int 4 12;;
 
 (* Scalar.of_infty  Create a scalar of type Float with the value multiplied
- by infinity (resulting in minus infinity, zero, or infinity *)
+ by infinity (resulting in minus infinity, zero, or infinity) *)
 let interval =  Interval.of_scalar (Scalar.of_int 0) (Scalar.of_infty 1);;
 
 (* Change interval *)
